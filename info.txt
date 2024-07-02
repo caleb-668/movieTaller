@@ -1,0 +1,13 @@
+\l ------> ver las bd
+
+\c nodelogin -----> acceder a la bd
+\du -------> ver lista de roles
+CREATE USER users WITH PASSWORD 'password' CREATEDB; ----> crear rol
+
+Server [localhost]:
+Database [postgres]: nodelogin
+Port [5432]: 5432
+Username [postgres]: users
+Contraseña para usuario users: password
+
+

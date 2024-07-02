@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>ProjectoTaller</title>
+
+  <!-- Estilos externos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;1,300;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styleTwo.css">
+
+  <!-- Scripts -->
+  <script src="https://kit.fontawesome.com/416d2ebe74.js" crossorigin="anonymous"></script>
+  <script defer src="/peliculas.js"></script>
+</head>
+
+<body>
+  <!-- <header>
+      <h1 class="dash">Dashboard</h1>
+      <form action="/" method="POST">
+        <button type="submit" class="btn btn-primary">Logout</button>
+      </form>
+      <h4></h4>
+    </header> -->
+
+  <!-- <div class="inf"></div>-->
+  <header>
+    <nav>
+      <a href="/users/dashboard">Home</a>
+      <a href="/users/register">LogOut</a>
+      <a href="">
+        <%= user %>
+      </a>
+    </nav>
+  </header>
+
+  <!-- carousel -->
+  <div class="carousel">
+    <!-- list item -->
+    <div class="list">
+      <div class="item">
+        <img src="/image/goz.jpg">
+        <div class="content">
+          <div class="author">CATFLIX</div>
+          <div class="title">GODZILLA REY</div>
+          <div class="topic">DE LOS MONSTRUOS</div>
+          <div class="des">
+            <!-- lorem 50 -->
+            Los criptozoólogos de la agencia Monarch tratan de enfrentrarse a un grupo de enormes monstruos, incluyendo el propio Godzilla. Entre todos intentan resistir a las embestidas de Mothra, Rodan o del último némesis de la humanidad: King Ghidorah. Estas ancianas criaturas harán todo lo posible por sobrevivir, poniendo en riesgo la existencia del ser humano en el planeta.
+          </div>
+          <div class="buttons">
+            <button onclick="seeMore()">SEE MORE</button>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="/image/freddy.jpg">
+        <div class="content">
+          <div class="author">CATFLIX</div>
+          <div class="title">FIVE NIGHTS</div>
+          <div class="topic">AT FREDDY</div>
+          <div class="des">
+            Película de terror sobrenatural y suspense basada en la exitosa franquicia de videojuegos de terror y supervivencia Five nights at Freddy's. Freddy Fazbear's Pizza es un restaurante familiar donde la fantasía y la diversión cobran vida, ya que utiliza mascotas animatrónicas de tamaño natural para las fiestas infantiles que allí se celebran. Cuando llega la noche, comienza el turno de Mike Schmidt (Josh Hutcherson), el nuevo guardia de seguridad de Freddy's que ahora, después de pasar por algunos problemas financieros, trabaja en este restaurante. Cuando pase su primera noche en el trabajo, Mike se dará cuenta de que el turno nocturno en Freddy's no será tan fácil de superar como esperaba, y vivirá más de una situación aterradora al cobrar vida las mascotas animatrónicas de este siniestro local.
+          </div>
+          <div class="buttons">
+            <button onclick="seeMore()">SEE MORE</button>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="/image/blade.jpg">
+        <div class="content">
+          <div class="author">CATFLIX</div>
+          <div class="title">BLADE RUNNER</div>
+          <div class="topic">2049</div>
+          <div class="des">
+            Al final del siglo XX, miles de hombres y mujeres dejaron la Tierra para conquistar el espacio y escapar de las grandes ciudades, que se habían vuelto inhabitables. En las colonias nació una nueva raza de esclavos androides llamados "Replicantes". Los nuevos androides son parecidos al hombre, pero superiores en fuerza y agilidad. Después de una revolución, el antiguo policía Rick Deckard debe encontrar y eliminar a los replicantes rebeldes.
+          </div>
+          <div class="buttons">
+            <button onclick="seeMore()">SEE MORE</button>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="/image/keanu.jpg">
+        <div class="content">
+          <div class="author">CATFLIX</div>
+          <div class="title">KEANU REEVES</div>
+          <div class="topic">CONSTANTIE</div>
+          <div class="des">
+            John Constantine. Nacido con el don de ver a los ángeles y demonios que viven en la tierra bajo aspecto humano, John Constantine se quitó la vida para escapar de sus visiones. Resucitado en contra de su voluntad, patrulla la frontera terrenal entre cielo e infierno.
+          </div>
+          <div class="buttons">
+            <button onclick="seeMore()">SEE MORE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- list thumnail -->
+    <div class="thumbnail">
+      <div class="item">
+        <img src="/image/goz.jpg">
+        <div class="content">
+          <div class="title">
+            Godzilla King of the Monsters
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="/image/freddy.jpg">
+        <div class="content">
+          <div class="title">
+            Five Nights At Freddy
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="/image/blade.jpg">
+        <div class="content">
+          <div class="title">
+            Blade Runner 2049
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="/image/keanu.jpg">
+        <div class="content">
+          <div class="title">
+            Constantine
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- next prev -->
+
+    <div class="arrows">
+      <button id="prev">
+        < </button>
+          <button id="next">></button>
+    </div>
+    <!-- time running -->
+    <div class="time"></div>
+  </div>
+
+
+  <script src="/app.js"></script>
+</body>
+
+</html>

@@ -32,6 +32,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+// Middleware para establecer isAdmin
+app.use((req, res, next) => {
+  if (req.isAuthenticated() && req.user.email === 'pedro@gmail.com') { // Reemplaza con el correo específico
+    req.session.isAdmin = true;
+  } else {
+    req.session.isAdmin = false;
+  }
+  next();
+});
+
+// Pasar isAdmin y user a las vistas
+app.use((req, res, next) => {
+  res.locals.isAdmin = req.session.isAdmin;
+  res.locals.user = req.user;
+  next();
+});
+
+
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -52,17 +70,43 @@ app.get("/users/dashboard", checkNotAuthenticated, (req, res) => {
 app.get("/users/peliculas", checkNotAuthenticated, (req, res) => {
   res.render("peliculas.ejs", { user: req.user.name });
 });
-app.get("/users/verMovie", checkNotAuthenticated, (req, res) => {
-  res.render("verMovie.ejs", { user: req.user.name });
+
+app.get("/users/verMovie", async (req, res) => {
+  const movieId = req.query.movieId;
+
+  // Ejemplo de enlaces de videos que podrías tener
+  const movieVideos = {
+    '786892': [{ key: 'https://player.cuevana.biz/player.php?h=xPGVAASKY7nq8KaEgwASgW.S.E5Wr8HwqVsXXKaLwa4jcxTar5R5z5rnqpRyHEXhQQRwOxVKDTX3drhpb7y0YUF3nmQDUpUmb1heRVkBPsowB_3TbN79YsAHVaB_7dcPCIjIPOXq4estnZkdGr1CXg--' }], //furiosa
+    '1022789': [{ key: 'https://player.cuevana.biz/player.php?h=xPGVAASKY7nq8KaEgwASgW.S.E5Wr8HwqVsXXKaLwa4jcxTar5R5z5rnqpRyHEXhcDXH8y4O8hiyscOhBOANyapOIGG7fihiqW3yQ0bwRWeHpgNErJYSwILNSekuYbVDRu5VYnXCxa9ALYNZAiT6DA--' }], //intensamente 2
+    '762441': [{ key: 'https://player.cuevana.biz/player.php?h=xPGVAASKY7nq8KaEgwASgW.S.E5Wr8HwqVsXXKaLwa4jcxTar5R5z5rnqpRyHEXhB099oZfU.gjMNq8cE40K8yxU2ejbXQxbydXzT16.RS50rmgS8PTO9IKoqrnSp62613vsGrg6MPIz.rxNIMDtrg--' }],//asi empezo el silencio
+    '573435': [{ key: 'https://player.cuevana.biz/player.php?h=xPGVAASKY7nq8KaEgwASgW.S.E5Wr8HwqVsXXKaLwa4jcxTar5R5z5rnqpRyHEXh4OJRYmOg8cB1Mojn1UW2o89fx42_laj50PIiti3Y_EbncCK9ybRnfBN_U3s_T6KFMXF9pfeOS3zCQy.189Fgsg--' }], //badboys hasta la muerte
+    '1016346': [{ key: 'https://player.cuevana.biz/player.php?h=xPGVAASKY7nq8KaEgwASgW.S.E5Wr8HwqVsXXKaLwa4jcxTar5R5z5rnqpRyHEXhaM8Iw2kk.i6izExpbo2rITwAg92xn5tSufZmXa6QZK734FLK6m38OQiuxUSFkw1LdLkqniAdcs1wcPi3tso4LA--' }], //ejecuta o muer
+    '823464': [{ key: 'https://player.cuevana.biz/player.php?h=xPGVAASKY7nq8KaEgwASgW.S.E5Wr8HwqVsXXKaLwa4jcxTar5R5z5rnqpRyHEXhKM.HqZ0Ub8LWQNIUghtai83oBehqrOdNIzAvWZFfU1RlN9ZPd6M1QPa7KAMQyPh8Wwm6bw2mj8f25stL8Ty9Ug--' }],//gozilla y kong
+    '955555': [{ key: 'https://doood.site/fakeplayer.php?h=038_DvDgIOFtn0TDuS9PLIvno9X8I7XpK5P4aQc7WGdE3_SwVkJRhtE60pClHQBAoWKtkDKZjb43XhcfEFwCXD.gblgDHQEqxG3zip1tW0TnuIg-' }], //fuerza bruta
+    // Añade más películas y sus enlaces de video aquí
+  };
+
+  try {
+    const options = { method: 'GET', headers: { accept: 'application/json' } };
+    const respuesta = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=ce6c6eca048773cc1ff195955c0c3183&language=es-MX`, options);
+    
+    if (respuesta.status === 200) {
+      const pelicula = await respuesta.json();
+      
+      // Agrega los videos manualmente si existen
+      pelicula.videos = movieVideos[movieId] || [];
+      
+      res.render("verMovie", { pelicula });
+    } else {
+      res.send("Hubo un problema obteniendo los detalles de la película.");
+    }
+  } catch (error) {
+    console.log(error);
+    res.send("Hubo un error.");
+  }
 });
 
-
-app.post("/users/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) { return next(err); }
-    res.redirect("/");
-  });
-});
 
 app.post("/users/register", async (req, res) => {
   let { name, email, password, password2 } = req.body;
@@ -133,6 +177,15 @@ app.post(
     failureFlash: true
   })
 );
+
+app.get("/users/admin", checkNotAuthenticated, (req, res) => {
+  if (req.session.isAdmin) {
+    res.render("admin.ejs");
+  } else {
+    res.redirect("/users/dashboard");
+  }
+});
+
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

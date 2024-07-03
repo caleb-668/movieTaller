@@ -38,10 +38,13 @@
   <header>
     <nav>
       <a href="/users/dashboard">Home</a>
-      <a href="/users/register">LogOut</a>
+      <a href="/users/login">LogOut</a>
       <a href="">
         <%= user %>
       </a>
+      <% if (isAdmin) { %>
+        <a href="/users/admin">DashboardAdmin</a>
+      <% } %>
     </nav>
   </header>
 

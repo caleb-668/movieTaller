@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 body{
     background:#010b14;
     padding: 0;
@@ -10,7 +11,7 @@ header {
     width: 1140px;
     max-width: 80%;
     margin: auto;
-    height: 100px;
+    height: 80px;
     display: flex;
     align-items: center;
     position: relative;
@@ -21,10 +22,26 @@ header {
 header a {
     color: white;
     margin-right: 40px;
+    font-size: 16px;
 }
 
 header a:hover {
     color: teal;
     text-decoration: underline;
     margin-right: 40px;
+}
+iframe{
+    width: 95vw;
+    height: 80vh;
+    margin: 0;
+}
+main{
+    width: 95vw;
+    display: grid;
+    place-items: center;
+}
+.titulo{
+    font-family: 'Popins';
+    color: white;
+    text-align: center;
 }

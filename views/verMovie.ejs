@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SeeMovie</title>
+    <title>SeeMovies</title>
     <link rel="stylesheet" href="/verMovie.css">
 </head>
 <body>
@@ -12,9 +12,18 @@
           <a href="/users/dashboard">Home</a>
           <a href="/users/register">LogOut</a>
           <a href="">
-            <%= user %>
           </a>
         </nav>
       </header>
+      <main>
+        <h1 class="titulo"><%= pelicula.title %></h1>
+        <% if (pelicula.videos && pelicula.videos.length > 0) { %>
+            <% pelicula.videos.forEach(function(video) { %>
+                <iframe src="<%= video.key %>" frameborder="0" allowfullscreen></iframe>
+            <% }); %>
+        <% } else { %>
+            <p style="color: white;">No se encuentra la pelicula disponible.</p>
+        <% } %>
+    </main>
 </body>
 </html>

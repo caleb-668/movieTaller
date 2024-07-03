@@ -64,6 +64,7 @@ body {
     border-radius: 16px;
     cursor: pointer;
 }
+
 a {
     text-decoration: none;
 }
@@ -83,6 +84,7 @@ header {
 header a {
     color: #eee;
     margin-right: 40px;
+    font-size: 16px;
 }
 
 header a:hover {
@@ -177,3 +179,32 @@ header a:hover {
 		opacity: 0;
 	}
 }
+.catflix{
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    color: white;
+    font-size: 350px;
+    text-shadow: 0 0 80px #00fffb, 0 0 160px #0081bc, 0 0 240px #0081bc;
+    animation: text 9s linear infinite;
+}
+.catflix:before{
+    content: attr(catflix);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateX(180deg);
+    line-height: 342px;
+    transform-origin: bottom;
+    background: linear-gradient(to bottom, #fff, transparent);
+    background-clip: text;
+    color: transparent;
+}
+/* @keyframes text {
+	0% {
+		transform: translateY(-700px);
+	}
+	100% {
+		transform: translateY(1200px);
+	}
+} */
